@@ -1,4 +1,15 @@
+import { trpc } from "@/utils/trpc"
 const Home = () => {
+  const { data, isLoading } = trpc.useQuery(["hello", { text: "Kirill" }])
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (data) {
+    return <div>{data?.greeting}</div>
+  }
+
   return (
     <div className=" h-screen w-screen flex flex-col justify-center items-center">
       <div className="text-2xl text-center ">Какой покемон более круглый?</div>
